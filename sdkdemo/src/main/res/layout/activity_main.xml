@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
+
+    <TextView
+        android:id="@+id/player_simple"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:drawableRight="@drawable/arrow_left"
+        android:gravity="center_vertical"
+        android:text="播放器简单使用"
+        android:textColor="#3F3F3F"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#efefef" />
+
+    <TextView
+        android:id="@+id/player_feed"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:drawableRight="@drawable/arrow_left"
+        android:gravity="center_vertical"
+        android:text="在列表中使用播放器"
+        android:textColor="#3F3F3F"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#efefef" />
+
+    <TextView
+        android:id="@+id/player_little"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:drawableRight="@drawable/arrow_left"
+        android:gravity="center_vertical"
+        android:text="小视频界面使用播放器"
+        android:textColor="#3F3F3F"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#efefef" />
+    <TextView
+        android:id="@+id/player_custom_ui"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:drawableRight="@drawable/arrow_left"
+        android:gravity="center_vertical"
+        android:text="自定义播放器控制UI"
+        android:textColor="#3F3F3F"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#efefef" />
+
+    <TextView
+        android:id="@+id/player_switch"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:drawableRight="@drawable/arrow_left"
+        android:gravity="center_vertical"
+        android:text="播放器无缝切换"
+        android:textColor="#3F3F3F"
+        android:textSize="15sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#efefef" />
+
+</LinearLayout>

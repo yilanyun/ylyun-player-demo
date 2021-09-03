@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/iv_cp_head"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/yl_back_head"
+        android:padding="1dp" />
+
+    <TextView
+        android:id="@+id/tv_cp_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/iv_cp_head"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@id/iv_cp_head"
+        android:textColor="#848484"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:text="小空的世界" />
+
+    <TextView
+        android:id="@+id/tv_media_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_cp_name"
+        android:layout_alignLeft="@+id/tv_cp_name"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="16dp"
+        android:lineSpacingExtra="2dp"
+        android:textColor="#333333"
+        android:textSize="14dp"
+        tools:text="盘点影视剧中有缘相识却无缘相守的情侣,最后一对最令人惋惜!" />
+
+    <FrameLayout
+        android:id="@+id/layout_item_container"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tv_media_title"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_media_cover"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/iv_media_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/yl_mp_ic_center_play" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_media_video_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/layout_item_container"
+        android:layout_alignBottom="@+id/layout_item_container"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="5dp"
+        android:textColor="#ffffff"
+        android:textSize="12dp"
+        tools:text="06:20"
+        tools:textColor="#999"/>
+
+</RelativeLayout>
