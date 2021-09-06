@@ -17,6 +17,7 @@ import com.yilan.sdk.common.ui.recycle.IViewHolderCreator;
 import com.yilan.sdk.common.ui.recycle.ViewAttachedToWindowListener;
 import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
 import com.yilan.sdk.player.ylplayer.PlayerStyle;
+import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.YLPlayerConfig;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
@@ -101,8 +102,8 @@ public class FeedFragment extends Fragment {
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof FeedViewHolder) {
             currentMedia = feedMedia;
-            playerEngine.play(feedMedia.videoId, feedMedia.url, ((FeedViewHolder) holder).contentContainer,
-                    R.id.layout_content, PlayerStyle.STYLE_16_9);
+
+            playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).playerStyle(PlayerStyle.STYLE_16_9).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
         }
     }
 

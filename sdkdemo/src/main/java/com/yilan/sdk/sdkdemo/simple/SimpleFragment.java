@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import com.yilan.sdk.common.util.FSScreen;
 import com.yilan.sdk.common.util.ToastUtil;
 import com.yilan.sdk.player.ylplayer.PlayerStyle;
+import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.callback.OnSimplePlayerCallBack;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
@@ -66,7 +67,7 @@ public class SimpleFragment extends Fragment {
         playerContainer.postDelayed(new Runnable() {
             @Override
             public void run() {
-                playerEngine.play("adfadffwe", MockData.getPlayerUrl(), playerContainer, R.id.img_cover, PlayerStyle.STYLE_MATCH);
+                playerEngine.play(new TaskInfo.Builder().videoID("adfadffwe").url( MockData.getPlayerUrl()).coverID(R.id.img_cover).build(), playerContainer);
             }
         },100);
         playerEngine.setPlayerCallBack(new OnSimplePlayerCallBack(){
@@ -143,21 +144,21 @@ public class SimpleFragment extends Fragment {
     public void playWithUrl() {
         String url = editText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play("playurl", url, playerContainer, R.id.img_cover, PlayerStyle.STYLE_MATCH);
+            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url( url).coverID(R.id.img_cover).build(), playerContainer);
         }
     }
 
     public void preloadUrl() {
         String url = preEditText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.prePlay("preplayer001", url);
+            playerEngine.prePlay(new TaskInfo.Builder().videoID("preplayer001").url( url).coverID(R.id.img_cover).build());
         }
     }
 
     public void playPreLoadUrl() {
         String url = preEditText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play("preplayer001", url, playerContainer, R.id.img_cover, PlayerStyle.STYLE_MATCH);
+            playerEngine.play(new TaskInfo.Builder().videoID("preplayer001").url( url).coverID(R.id.img_cover).build(), playerContainer);
         }
     }
 }

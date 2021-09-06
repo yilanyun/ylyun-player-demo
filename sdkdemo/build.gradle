@@ -48,7 +48,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.android.support:multidex:1.0.3'
     //一览sdk
-    implementation "com.yilan.sdk:player:3.3.3.30"
+    implementation "com.yilan.sdk:player:3.3.3.32"
     // ijk
     implementation 'tv.yilan.media:player-java:1.0.0'
     implementation 'tv.yilan.media:player-armv7a:1.0.0'

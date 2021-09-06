@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.yilan.sdk.player.ylplayer.PlayerStyle;
+import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
 import com.yilan.sdk.player.ylplayer.ui.PGCPlayerUI;
@@ -54,22 +55,12 @@ public class SimpleWithControllerFragment extends Fragment {
         playerContainer = view.findViewById(R.id.player_container);
         playerEngine = YLMultiPlayerEngine.getEngineByContainer(playerContainer)
                 .withController(new PGCPlayerUI());
-        playerContainer.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                playerEngine.play("1111111111", MockData.getPlayerUrl(), playerContainer, R.id.img_cover, PlayerStyle.STYLE_MATCH);
-            }
-        },100);
-
+        final TaskInfo info = new TaskInfo.Builder().videoID("1111111111").coverID(R.id.img_cover).url(MockData.getPlayerUrl()).build();
+        playerEngine.play(info, playerContainer);
         playerContainer2 = view.findViewById(R.id.player_container2);
         playerEngine2 = YLMultiPlayerEngine.getEngineByContainer(playerContainer2)
                 .withController(new PGCPlayerUI().itemUI(new TouchPlayerUI()));
-        playerContainer2.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                playerEngine2.play("222222222", MockData.getPlayerUrl(1), playerContainer2, R.id.img_cover2, PlayerStyle.STYLE_MATCH);
-            }
-        },100);
+        playerEngine2.play(new TaskInfo.Builder().videoID("222222222").coverID(R.id.img_cover2).url(MockData.getPlayerUrl(1)).build(), playerContainer2);
     }
 
     @Override
