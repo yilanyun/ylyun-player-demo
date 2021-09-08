@@ -13,12 +13,10 @@ import android.widget.FrameLayout;
 
 import com.yilan.sdk.common.util.FSScreen;
 import com.yilan.sdk.common.util.ToastUtil;
-import com.yilan.sdk.player.ylplayer.PlayerStyle;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.callback.OnSimplePlayerCallBack;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
-import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
-import com.yilan.sdk.player.ylplayer.ui.PGCPlayerUI;
+import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.sdkdemo.MockData;
 import com.yilan.sdk.sdkdemo.R;
 
@@ -52,10 +50,20 @@ public class SimpleFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        /**
+         * playerContainer 用于放置播放器的容器
+         */
         playerContainer = view.findViewById(R.id.player_container);
         editText = view.findViewById(R.id.edit_input_url);
         preEditText = view.findViewById(R.id.edit_input_preurl);
-        playerEngine = YLMultiPlayerEngine.getEngineByContainer(playerContainer);
+        /**
+         * 在playerContainer中创建播放器
+         * 如果需要使用预加载功能，通过此方法创建播放器引擎 YLPlayerFactory.createMultiEngine(playerContainer);
+         * 通过 YLPlayerFactory.createSimpleEngine(playerContainer)创建播放器会更加节省内存
+         */
+        playerEngine = YLPlayerFactory.createMultiEngine(playerContainer);
+
+
         playerContainer.post(new Runnable() {
             @Override
             public void run() {
@@ -64,17 +72,24 @@ public class SimpleFragment extends Fragment {
                 playerContainer.setLayoutParams(params);
             }
         });
-        playerContainer.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                playerEngine.play(new TaskInfo.Builder().videoID("adfadffwe").url( MockData.getPlayerUrl()).coverID(R.id.img_cover).build(), playerContainer);
-            }
-        },100);
-        playerEngine.setPlayerCallBack(new OnSimplePlayerCallBack(){
+        /**
+         *
+         * 调用play播放视频
+         * 其中TaskInfo表示本次播放的任务，传入参数
+         * videoID：视频的id，要保证和视频对应
+         * title：可选参数，若传入此参数，将会在 controller 的ui上显示，详见 {@link SimpleWithControllerFragment}
+         * url:视频地址
+         * coverID：该视频的封面 的view，在视频播放时，会将该view隐藏，可选参数
+         * playerContainer ：该视频所应该出现的位置，通常时 封面 view 的父布局
+         */
+        playerEngine.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build(), playerContainer);
+
+
+        playerEngine.setPlayerCallBack(new OnSimplePlayerCallBack() {
             @Override
             public void onError(String pager, String videoID, String taskID) {
                 super.onError(pager, videoID, taskID);
-                ToastUtil.show(getActivity(),"播放失败");
+                ToastUtil.show(getActivity(), "播放失败");
             }
         });
         view.findViewById(R.id.onPlay).setOnClickListener((v) -> {
@@ -98,6 +113,9 @@ public class SimpleFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (playerEngine != null) {
+            /**
+             * 暂停
+             */
             playerEngine.pause();
         }
     }
@@ -106,6 +124,9 @@ public class SimpleFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (playerEngine != null) {
+            /**
+             * 续播
+             */
             playerEngine.resume();
         }
     }
@@ -114,6 +135,9 @@ public class SimpleFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         if (playerEngine != null) {
+            /**
+             * 释放播放器
+             */
             playerEngine.release();
         }
     }
@@ -129,7 +153,6 @@ public class SimpleFragment extends Fragment {
 
     /**
      * 点击暂停
-     *
      */
     public void onPauseClick() {
         if (playerEngine != null) {
@@ -139,26 +162,28 @@ public class SimpleFragment extends Fragment {
 
     /**
      * 从edit的url
-     *
      */
     public void playWithUrl() {
         String url = editText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url( url).coverID(R.id.img_cover).build(), playerContainer);
+            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).build(), playerContainer);
         }
     }
 
     public void preloadUrl() {
         String url = preEditText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.prePlay(new TaskInfo.Builder().videoID("preplayer001").url( url).coverID(R.id.img_cover).build());
+            /**
+             * 在视频播放前，可通过此方法预加载视频
+             */
+            playerEngine.prePlay(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build());
         }
     }
 
     public void playPreLoadUrl() {
         String url = preEditText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("preplayer001").url( url).coverID(R.id.img_cover).build(), playerContainer);
+            playerEngine.play(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build(), playerContainer);
         }
     }
 }

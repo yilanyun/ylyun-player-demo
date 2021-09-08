@@ -2,18 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     android:orientation="vertical">
-
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:background="@drawable/button_drawable"
         android:onClick="simplePlayer"
+        android:textColor="#ffffff"
+        android:layout_marginTop="15dp"
         android:text="简单播放" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="simpleDetail"
+        android:textSize="15sp"
+        android:background="@drawable/button_drawable"
+        android:textColor="#ffffff"
+        android:layout_marginTop="15dp"
         android:text="简单播放-带控制器" />
 </LinearLayout>

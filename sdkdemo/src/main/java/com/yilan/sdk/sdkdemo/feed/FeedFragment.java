@@ -18,11 +18,9 @@ import com.yilan.sdk.common.ui.recycle.ViewAttachedToWindowListener;
 import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
 import com.yilan.sdk.player.ylplayer.PlayerStyle;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
-import com.yilan.sdk.player.ylplayer.YLPlayerConfig;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
-import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
+import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.PGCPlayerUI;
-import com.yilan.sdk.player.ylplayer.ui.TouchPlayerUI;
 import com.yilan.sdk.sdkdemo.MockData;
 import com.yilan.sdk.sdkdemo.R;
 
@@ -69,6 +67,7 @@ public class FeedFragment extends Fragment {
                 }).clickListener(new OnItemClickListener<FeedMedia>() {
                     @Override
                     public void onClick(View view, int position, FeedMedia feedMedia) {
+                        //点击item播放视频
                         playVideo(feedMedia, position);
                     }
                 }).viewAttachListener(new ViewAttachedToWindowListener() {
@@ -86,15 +85,10 @@ public class FeedFragment extends Fragment {
                     }
                 });
         recyclerView.setAdapter(adapter);
-        recyclerView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                adapter.setDataList(MockData.getMockFeed());
-            }
-        }, 600);
+        adapter.setDataList(MockData.getMockFeed());
         //初始化播放器
         ViewGroup playerContainer = viewRoot.findViewById(R.id.feed_player_container_inner);
-        playerEngine = YLMultiPlayerEngine.getEngineByContainer(playerContainer)
+        playerEngine = YLPlayerFactory.createSimpleEngine(playerContainer)
                 .videoLoop(false).withController(new PGCPlayerUI());
     }
 

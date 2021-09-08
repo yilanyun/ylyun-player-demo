@@ -11,15 +11,25 @@
         android:layout_height="wrap_content"
         android:textColor="#333"
         android:textSize="16sp"
-        android:text="1.普通类型的控制UI"/>
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:text="全屏状态下，可通过手势控制音量，进度，亮度"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#333"
+        android:textSize="16sp"
+        android:text="视频1，点击封面开始播放"/>
 
     <FrameLayout
         android:id="@+id/player_container"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="210dp">
 
         <ImageView
             android:id="@+id/img_cover"
+            android:src="@drawable/video_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
@@ -31,15 +41,17 @@
         android:layout_height="wrap_content"
         android:textColor="#333"
         android:textSize="16sp"
-        android:text="2.带手势控制的播放器UI，全屏后才有效果"/>
+        android:layout_marginTop="15dp"
+        android:text="视频2,点击封面开始播放"/>
 
     <FrameLayout
         android:id="@+id/player_container2"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="210dp">
 
         <ImageView
             android:id="@+id/img_cover2"
+            android:src="@drawable/video_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
