@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.yilan.sdk.sdkdemo.con.PlayerActivity1;
 import com.yilan.sdk.sdkdemo.simple.SimplePageActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,25 +24,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.player_feed).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewPageActivity.start(MainActivity.this,NewPageActivity.FEED);
+                NewPageActivity.start(MainActivity.this, NewPageActivity.FEED);
             }
         });
         findViewById(R.id.player_little).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-            }
-        });
-        findViewById(R.id.player_custom_ui).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+                NewPageActivity.start(MainActivity.this, NewPageActivity.UGC_FEED);
             }
         });
         findViewById(R.id.player_switch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                PlayerActivity1.start(MainActivity.this);
             }
         });
     }

@@ -10,11 +10,13 @@ import android.support.v7.app.AppCompatActivity;
 import com.yilan.sdk.sdkdemo.feed.FeedFragment;
 import com.yilan.sdk.sdkdemo.simple.SimpleFragment;
 import com.yilan.sdk.sdkdemo.simple.SimpleWithControllerFragment;
+import com.yilan.sdk.sdkdemo.ugcfeed.UgcFeedFragment;
 
 public class NewPageActivity extends AppCompatActivity {
     public static int SIMPLE = 1;
     public static int SIMPLE_WITH_CONTROL = 2;
     public static int FEED = 3;
+    public static int UGC_FEED = 4;
     int type = -1;
 
     public static void start(Context context,int type) {
@@ -48,6 +50,8 @@ public class NewPageActivity extends AppCompatActivity {
             fragment = SimpleWithControllerFragment.newInstance();
         } else if (type == NewPageActivity.FEED) {
             fragment = FeedFragment.newInstance();
+        } else if (type == NewPageActivity.UGC_FEED) {
+            fragment = UgcFeedFragment.newInstance();
         }
         return fragment;
     }

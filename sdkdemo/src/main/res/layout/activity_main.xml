@@ -45,18 +45,6 @@
         android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/player_custom_ui"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/button_drawable"
-        android:gravity="center"
-        android:text="自定义播放器控制UI"
-        android:textColor="#ffffff"
-
-        android:textSize="15sp" />
-
-    <TextView
         android:id="@+id/player_switch"
         android:layout_width="match_parent"
         android:layout_height="46dp"

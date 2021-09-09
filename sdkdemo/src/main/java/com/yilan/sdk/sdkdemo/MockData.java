@@ -74,4 +74,66 @@ public class MockData {
         return media;
     }
 
+    public static List<FeedMedia> getMockUgc() {
+        String[] names = {"娱乐情报站", "体坛在线", "上游新闻", "政知道", "南昌晚报"};
+        List<FeedMedia> media = new ArrayList<>();
+        media.add(new FeedMedia(
+                "我和我的父辈吴京吴磊演父子",
+                "https://img.yilanvaas.com/4c11/20210908/43f338825f05639e69b865cc79db60b1!open_middleugc",
+                "http://vv.qianpailive.com/8700/20210908/1ddde70ae557397e9275cb3686ecb3ee"
+        ));
+        media.add(new FeedMedia(
+                "官宣！周琦两年合同正式加盟墨尔本凤凰队，澳洲NBL中国德比要来了",
+                "https://img.yilanvaas.com/v/20210908/218c2412f27fa4a69aa120a609013149.jpg!open_middleugc",
+                "http://vv.qianpailive.com/496f/20210908/dad0f7f9217254a045bc691e8fb4a6b2"
+        ));
+        media.add(new FeedMedia(
+                "官宣！国庆节放假调休安排来了，共7天",
+                "https://img.yilanvaas.com/56c6/20210908/b5d94fe2e7a74941f35145b86a688b45!open_middleugc",
+                "http://vv.qianpailive.com/7f25/20210908/24a52c6c238d051af84cac01175d4ebb"
+        ));
+        media.add(new FeedMedia(
+                "墨西哥发生7.1级地震，天空现诡异蓝光",
+                "https://img.yilanvaas.com/b560/20210908/3c2adff3f425b85c5af523f6a3eaf5f0!open_middleugc",
+                "http://vv.qianpailive.com/c130/20210908/41da06a781c7102b03b83ad15acd87ad"
+        ));
+        media.add(new FeedMedia(
+                "南昌一景区湖内水草疯长，每天打捞4吨！",
+                "https://img.yilanvaas.com/00000001/user/21f5218e6b2a513d8ac8e081d8796783.png!open_middlecp",
+                "http://vv.qianpailive.com/e3f8/20210908/37bd86c0c79a51d7b01dc03ec4a5e6f9"
+        ));
+
+        media.add(new FeedMedia(
+                "我和我的父辈吴京吴磊演父子",
+                "https://img.yilanvaas.com/4c11/20210908/43f338825f05639e69b865cc79db60b1!open_middleugc",
+                "http://vv.qianpailive.com/8700/20210908/1ddde70ae557397e9275cb3686ecb3ee"
+        ));
+        media.add(new FeedMedia(
+                "官宣！周琦两年合同正式加盟墨尔本凤凰队，澳洲NBL中国德比要来了",
+                "https://img.yilanvaas.com/v/20210908/218c2412f27fa4a69aa120a609013149.jpg!open_middleugc",
+                "http://vv.qianpailive.com/496f/20210908/dad0f7f9217254a045bc691e8fb4a6b2"
+        ));
+        media.add(new FeedMedia(
+                "官宣！国庆节放假调休安排来了，共7天",
+                "https://img.yilanvaas.com/56c6/20210908/b5d94fe2e7a74941f35145b86a688b45!open_middleugc",
+                "http://vv.qianpailive.com/7f25/20210908/24a52c6c238d051af84cac01175d4ebb"
+        ));
+        media.add(new FeedMedia(
+                "墨西哥发生7.1级地震，天空现诡异蓝光",
+                "https://img.yilanvaas.com/b560/20210908/3c2adff3f425b85c5af523f6a3eaf5f0!open_middleugc",
+                "http://vv.qianpailive.com/c130/20210908/41da06a781c7102b03b83ad15acd87ad"
+        ));
+        media.add(new FeedMedia(
+                "南昌一景区湖内水草疯长，每天打捞4吨！",
+                "http://img.yilanvaas.com/00000001/user/21f5218e6b2a513d8ac8e081d8796783.png!open_middlecp",
+                "http://vv.qianpailive.com/e3f8/20210908/37bd86c0c79a51d7b01dc03ec4a5e6f9"
+        ));
+
+        for (int i = 0; i < media.size(); i++) {
+            media.get(i).videoId = System.currentTimeMillis() + "_" + i;
+            media.get(i).name = names[i % 4];
+        }
+        return media;
+    }
+
 }

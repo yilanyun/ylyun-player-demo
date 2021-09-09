@@ -1,8 +1,11 @@
 package com.yilan.sdk.sdkdemo.feed;
 
-public class FeedMedia {
+import java.io.Serializable;
+
+public class FeedMedia implements Serializable {
     public String videoId;
     public String title;
+    public String name;
     public String cover;
     public String url;
 
