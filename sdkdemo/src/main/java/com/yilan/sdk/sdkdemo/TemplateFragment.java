@@ -8,10 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
+import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
+
 
 public class TemplateFragment extends Fragment {
-    IYLPlayerEngine playerEngine;
+    IYLPlayer playerEngine;
     public TemplateFragment() {
     }
 

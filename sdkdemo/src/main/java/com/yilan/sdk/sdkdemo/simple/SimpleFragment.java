@@ -15,14 +15,14 @@ import com.yilan.sdk.common.util.FSScreen;
 import com.yilan.sdk.common.util.ToastUtil;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.callback.OnSimplePlayerCallBack;
-import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
+import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.sdkdemo.MockData;
 import com.yilan.sdk.sdkdemo.R;
 
 public class SimpleFragment extends Fragment {
 
-    IYLPlayerEngine playerEngine;
+    IYLPlayer playerEngine;
     FrameLayout playerContainer;
     EditText editText;
     EditText preEditText;
@@ -61,7 +61,7 @@ public class SimpleFragment extends Fragment {
          * 如果需要使用预加载功能，通过此方法创建播放器引擎 YLPlayerFactory.createMultiEngine(playerContainer);
          * 通过 YLPlayerFactory.createSimpleEngine(playerContainer)创建播放器会更加节省内存
          */
-        playerEngine = YLPlayerFactory.createMultiEngine(playerContainer);
+        playerEngine = YLPlayerFactory.createEngine(playerContainer);
 
 
         playerContainer.post(new Runnable() {

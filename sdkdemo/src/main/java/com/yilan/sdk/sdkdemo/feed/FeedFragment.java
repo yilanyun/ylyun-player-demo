@@ -18,7 +18,7 @@ import com.yilan.sdk.common.ui.recycle.ViewAttachedToWindowListener;
 import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
 import com.yilan.sdk.player.ylplayer.PlayerStyle;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
-import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
+import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.PGCPlayerUI;
 import com.yilan.sdk.sdkdemo.MockData;
@@ -26,7 +26,7 @@ import com.yilan.sdk.sdkdemo.R;
 
 public class FeedFragment extends Fragment {
 
-    IYLPlayerEngine playerEngine;
+    IYLPlayer playerEngine;
     RecyclerView recyclerView;
     LinearLayoutManager manager;
     FeedMedia currentMedia;
@@ -88,7 +88,7 @@ public class FeedFragment extends Fragment {
         adapter.setDataList(MockData.getMockFeed());
         //初始化播放器
         ViewGroup playerContainer = viewRoot.findViewById(R.id.feed_player_container_inner);
-        playerEngine = YLPlayerFactory.createSimpleEngine(playerContainer)
+        playerEngine = YLPlayerFactory.createEngine(playerContainer)
                 .videoLoop(false).withController(new PGCPlayerUI());
     }
 

@@ -23,7 +23,7 @@ import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
 import com.yilan.sdk.player.ylplayer.PlayerState;
 import com.yilan.sdk.player.ylplayer.PlayerStyle;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
-import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
+import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.UGCPlayerUI;
@@ -41,7 +41,7 @@ import java.util.List;
 public class UgcFeedFragment extends Fragment {
 
     //播放器引擎
-    IYLPlayerEngine playerEngine;
+    IYLPlayer playerEngine;
     //播放器容器
     ViewGroup playerContainer;
     RecyclerView recyclerView;
@@ -96,7 +96,7 @@ public class UgcFeedFragment extends Fragment {
      */
     private void initPlayerEngine() {
         playerEngine = YLPlayerFactory
-                .createMultiEngine(playerContainer)
+                .createEngine(playerContainer)
                 //播放器的控制UI
                 .withController(new UGCPlayerUI());
     }
@@ -186,7 +186,7 @@ public class UgcFeedFragment extends Fragment {
                     .build();
             // holder.itemView 作为锚点view传入，当列表滑动过程中，当前视频会跟随锚点view进行滑动
             // 需要注意的是，播放时传入的view是每个item的根view或其子view
-            playerEngine.play(taskInfo, holder.itemView);
+            playerEngine.play(taskInfo, (ViewGroup) holder.itemView);
         } else {
             System.out.println(" >>>>>>>>>>>>>  播放错误  <<<<<<<<<<<");
         }
