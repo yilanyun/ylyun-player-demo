@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.yilan.sdk.sdkdemo.feed.AutoPlayFeedFragment;
 import com.yilan.sdk.sdkdemo.feed.FeedFragment;
 import com.yilan.sdk.sdkdemo.simple.SimpleFragment;
 import com.yilan.sdk.sdkdemo.simple.SimpleWithControllerFragment;
@@ -16,7 +17,8 @@ public class NewPageActivity extends AppCompatActivity {
     public static int SIMPLE = 1;
     public static int SIMPLE_WITH_CONTROL = 2;
     public static int FEED = 3;
-    public static int UGC_FEED = 4;
+    public static int FEED_AUTO_PLAY = 4;
+    public static int UGC_FEED = 5;
     int type = -1;
 
     public static void start(Context context,int type) {
@@ -52,6 +54,8 @@ public class NewPageActivity extends AppCompatActivity {
             fragment = FeedFragment.newInstance();
         } else if (type == NewPageActivity.UGC_FEED) {
             fragment = UgcFeedFragment.newInstance();
+        } else if (type == NewPageActivity.FEED_AUTO_PLAY) {
+            fragment = AutoPlayFeedFragment.newInstance();
         }
         return fragment;
     }

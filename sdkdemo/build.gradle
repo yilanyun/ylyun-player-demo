@@ -8,7 +8,7 @@ android {
         targetSdkVersion 28
         versionCode 408
         ndk {
-            abiFilters 'armeabi-v7a'
+            abiFilters 'armeabi-v7a','x86'
         }
     }
 
@@ -52,6 +52,7 @@ dependencies {
     // ijk
     implementation 'tv.yilan.media:player-java:1.0.0'
     implementation 'tv.yilan.media:player-armv7a:1.0.0'
+    implementation 'tv.yilan.media:player-x86:1.0.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.1'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
 

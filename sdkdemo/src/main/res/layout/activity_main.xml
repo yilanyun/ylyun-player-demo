@@ -7,10 +7,12 @@
     android:paddingLeft="10dp"
     android:paddingTop="20dp"
     android:paddingRight="10dp">
+
     <TextView
         android:layout_width="wrap_content"
-        android:text="YLPlayerSDK : 3.3.3.32"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="YLPlayerSDK : 3.3.3.32" />
+
     <TextView
         android:id="@+id/player_simple"
         android:layout_width="match_parent"
@@ -30,6 +32,17 @@
         android:background="@drawable/button_drawable"
         android:gravity="center"
         android:text="在列表中使用播放器"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/player_feed_auto"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_drawable"
+        android:gravity="center"
+        android:text="列表中滑动时自动播放"
         android:textColor="#ffffff"
         android:textSize="15sp" />
 
@@ -54,5 +67,10 @@
         android:text="播放器无缝切换"
         android:textColor="#ffffff"
         android:textSize="15sp" />
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
