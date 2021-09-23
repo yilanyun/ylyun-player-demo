@@ -87,8 +87,13 @@ public class FeedFragment extends Fragment {
                 });
         recyclerView.setAdapter(adapter);
         adapter.setDataList(MockData.getMockFeed());
-        //初始化播放器
+        /**
+         * 用于存放播放器的容器
+         */
         ViewGroup playerContainer = viewRoot.findViewById(R.id.feed_player_container_inner);
+        /**
+         * 创建播放器
+         */
         playerEngine = new YLCloudPlayerEngine(YLPlayerFactory.createEngine(playerContainer))
                 .videoLoop(false).withController(new PGCPlayerUI());
     }
@@ -124,13 +129,5 @@ public class FeedFragment extends Fragment {
         if (playerEngine != null) {
             playerEngine.release();
         }
-    }
-
-    public boolean onBackPress() {
-        if (getChildFragmentManager().getBackStackEntryCount() > 0) {
-            getChildFragmentManager().popBackStack();
-            return true;
-        }
-        return false;
     }
 }

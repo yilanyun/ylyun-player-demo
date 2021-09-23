@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 
 import com.yilan.sdk.common.util.FSScreen;
 import com.yilan.sdk.common.util.ToastUtil;
+import com.yilan.sdk.player.ylplayer.PlayerStyle;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.callback.OnSimplePlayerCallBack;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
@@ -166,7 +167,7 @@ public class SimpleFragment extends Fragment {
     public void playWithUrl() {
         String url = editText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).build(), playerContainer);
+            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).cacheEnable(true).title("视频标题").playerStyle(PlayerStyle.STYLE_MATCH).build(), playerContainer);
         }
     }
 

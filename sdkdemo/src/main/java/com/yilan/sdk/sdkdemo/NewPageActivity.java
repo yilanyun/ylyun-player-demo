@@ -71,12 +71,4 @@ public class NewPageActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
-
-    @Override
-    public void onBackPressed() {
-        if (fragment instanceof FeedFragment && ((FeedFragment) fragment).onBackPress()) {
-            return;
-        }
-        super.onBackPressed();
-    }
 }
