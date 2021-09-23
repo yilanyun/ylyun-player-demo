@@ -69,7 +69,7 @@ public class MockData {
                 "https://vv.qianpailive.com/245c/20210902/8db9c49ec8e2106db24f3df0efc4e452?auth_key=1630582602-0-0-28c3d20c13249d31ce36075f33d27413"
         ));
         for (int i = 0; i < media.size(); i++) {
-            media.get(i).videoId = System.currentTimeMillis() + "" + i;
+            media.get(i).videoId = i + "";
         }
         return media;
     }

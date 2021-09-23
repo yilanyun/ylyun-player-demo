@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:textColor="#333"
         android:textSize="16sp"
-        android:text="视频1，点击封面开始播放"/>
+        android:text="视频1，点击封面开始播放,播放后再次点击，唤出控制器"/>
 
     <FrameLayout
         android:id="@+id/player_container"
@@ -42,7 +42,7 @@
         android:textColor="#333"
         android:textSize="16sp"
         android:layout_marginTop="15dp"
-        android:text="视频2,点击封面开始播放"/>
+        android:text="视频2,点击封面开始播放,播放后再次点击，唤出控制器"/>
 
     <FrameLayout
         android:id="@+id/player_container2"

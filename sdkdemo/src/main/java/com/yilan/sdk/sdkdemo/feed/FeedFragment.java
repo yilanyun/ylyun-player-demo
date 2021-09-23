@@ -16,9 +16,10 @@ import com.yilan.sdk.common.ui.recycle.BaseViewHolder;
 import com.yilan.sdk.common.ui.recycle.IViewHolderCreator;
 import com.yilan.sdk.common.ui.recycle.ViewAttachedToWindowListener;
 import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
-import com.yilan.sdk.player.ylplayer.PlayerStyle;
+import com.yilan.sdk.player.ylplayer.PlayerState;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
+import com.yilan.sdk.player.ylplayer.engine.YLCloudPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.PGCPlayerUI;
 import com.yilan.sdk.sdkdemo.MockData;
@@ -88,7 +89,7 @@ public class FeedFragment extends Fragment {
         adapter.setDataList(MockData.getMockFeed());
         //初始化播放器
         ViewGroup playerContainer = viewRoot.findViewById(R.id.feed_player_container_inner);
-        playerEngine = YLPlayerFactory.createEngine(playerContainer)
+        playerEngine = new YLCloudPlayerEngine(YLPlayerFactory.createEngine(playerContainer))
                 .videoLoop(false).withController(new PGCPlayerUI());
     }
 
@@ -96,8 +97,8 @@ public class FeedFragment extends Fragment {
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof FeedViewHolder) {
             currentMedia = feedMedia;
-
-            playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).playerStyle(PlayerStyle.STYLE_16_9).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
+            playerEngine.changeContainer(((FeedViewHolder) holder).contentContainer);
+            playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
         }
     }
 
@@ -123,5 +124,13 @@ public class FeedFragment extends Fragment {
         if (playerEngine != null) {
             playerEngine.release();
         }
+    }
+
+    public boolean onBackPress() {
+        if (getChildFragmentManager().getBackStackEntryCount() > 0) {
+            getChildFragmentManager().popBackStack();
+            return true;
+        }
+        return false;
     }
 }

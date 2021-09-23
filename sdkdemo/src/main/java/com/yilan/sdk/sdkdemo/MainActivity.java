@@ -1,5 +1,6 @@
 package com.yilan.sdk.sdkdemo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.player_switch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PlayerListActivity.start(v.getContext());
             }
         });
     }
