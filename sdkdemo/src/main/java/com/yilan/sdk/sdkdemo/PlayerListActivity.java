@@ -29,7 +29,6 @@ import com.yilan.sdk.sdkdemo.feed.FeedViewHolder;
  * 此页面演示，在列表页面播放时，如果做到跳转详情页无缝衔接
  */
 public class PlayerListActivity extends AppCompatActivity {
-    String videoId = "adfasdfsd";
     private RecyclerView recyclerView;
     LinearLayoutManager manager;
     IYLPlayerEngine playerEngine;
@@ -67,7 +66,7 @@ public class PlayerListActivity extends AppCompatActivity {
                          * 点击视频开始播放，再次点击则跳转到下一页
                          */
                         if (playerEngine.getPlayerState().value >= PlayerState.PREPARING.value
-                                && playerEngine.getPlayerState().value < PlayerState.STOP.value) {
+                                && playerEngine.getPlayerState().value < PlayerState.STOP.value&&PlayerListActivity.this.position==position) {
                             onViewClick(position);
                         } else {
                             playVideo(position);
@@ -88,17 +87,17 @@ public class PlayerListActivity extends AppCompatActivity {
          */
         FeedViewHolder holder = (FeedViewHolder) recyclerView.findViewHolderForAdapterPosition(position);
         Bundle bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this, holder.contentContainer, "player").toBundle();
-        PlayerDetailActivity.start(this, videoId, bundle);
+        PlayerDetailActivity.start(this, MockData.getMockFeed().get(position).videoId, bundle);
     }
 
     private void playVideo(int position) {
         FeedViewHolder holder = (FeedViewHolder) recyclerView.findViewHolderForAdapterPosition(position);
         if (holder == null) return;
         TaskInfo taskInfo = new TaskInfo.Builder()
-                .videoID(videoId)
+                .videoID(MockData.getMockFeed().get(position).videoId)
                 .coverID(R.id.layout_content)//此view 在播放器播放时会将其隐藏，通常为封面imageview
                 .title("测试视频")
-                .url(MockData.getPlayerUrl())
+                .url(MockData.getMockFeed().get(position).url)
                 .build();
         playerEngine.play(taskInfo, holder.contentContainer);
     }
