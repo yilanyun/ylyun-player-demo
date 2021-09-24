@@ -64,7 +64,18 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/button_drawable"
         android:gravity="center"
-        android:text="自定义播放器控制UI"
+        android:text="播放器自定义控制UI"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/player_seamless"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_drawable"
+        android:gravity="center"
+        android:text="播放器无缝切换示例"
         android:textColor="#ffffff"
         android:textSize="15sp" />
 

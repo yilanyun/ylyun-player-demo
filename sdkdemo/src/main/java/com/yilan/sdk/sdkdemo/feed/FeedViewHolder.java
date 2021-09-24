@@ -32,11 +32,9 @@ public class FeedViewHolder extends BaseViewHolder<FeedMedia> {
         mediaTitle = itemView.findViewById(R.id.tv_media_title);
         mediaCover = itemView.findViewById(R.id.iv_media_cover);
         contentContainer = itemView.findViewById(R.id.layout_item_container);
-        ViewGroup.LayoutParams params = contentContainer.getLayoutParams();
-        params.width = FSScreen.getScreenWidth();
-        params.height = params.width * 9 / 16;
-        contentContainer.setLayoutParams(params);
+        proxyClick(mediaTitle);
     }
+
 
     @Override
     public void onBindViewHolder(FeedMedia item, final List dataList) {

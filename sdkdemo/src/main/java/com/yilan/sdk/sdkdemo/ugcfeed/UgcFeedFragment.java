@@ -97,6 +97,7 @@ public class UgcFeedFragment extends Fragment {
     private void initPlayerEngine() {
         playerEngine = YLPlayerFactory
                 .createEngine(playerContainer)
+                .videoLoop(true)
                 //播放器的控制UI
                 .withController(new UGCPlayerUI());
     }
@@ -170,13 +171,14 @@ public class UgcFeedFragment extends Fragment {
         }
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder != null) {
-            /*
+            /**
              * 其中TaskInfo表示本次播放的任务
              *
              * videoID：视频的id，要保证和视频对应
              * title：可选参数，若传入此参数，将会在 controller 的ui上显示，详见 {@link SimpleWithControllerFragment}
              * url:视频地址
              * coverID：该视频的封面 的view，在视频播放时，会将该view隐藏，可选参数
+             * playerStyle 这是播放器 适配模式 PlayerStyle.STYLE_MATCH 匹配封面图尺寸 STYLE_16_9 宽：高 = 16；9 以此类推STYLE_9_16 ,STYLE_4_3
              */
             TaskInfo taskInfo = new TaskInfo.Builder()
                     .videoID(feedMedia.videoId)

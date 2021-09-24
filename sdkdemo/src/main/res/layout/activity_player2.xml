@@ -1,33 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    >
     <com.yilan.sdk.player.PlayerEngineView
-        android:id="@+id/player"
+        android:id="@+id/view_playerView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="#000">
-
+        android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/cover"
+            android:id="@+id/img_cover"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop" />
     </com.yilan.sdk.player.PlayerEngineView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/player">
 
-        <TextView
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view_playerView"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 "
-            android:textSize="20sp" />
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal">
 
-    </ScrollView>
+            <Button
+                android:id="@+id/onPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_drawable"
+                android:textColor="#ffffff"
+                android:layout_marginTop="10dp"
+                android:text="播放" />
+
+            <Button
+                android:id="@+id/onPause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_drawable"
+                android:textColor="#ffffff"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="暂停" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/playWithUrl"
+                android:layout_width="wrap_content"
+                android:background="@drawable/button_drawable"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="5dp"
+                android:layout_height="wrap_content"
+                android:text="播放URL" />
+
+            <EditText
+                android:id="@+id/edit_input_url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="输入播放地址"
+                android:singleLine="true"
+                android:text="https://vv.qianpailive.com/386e/20210714/f565c8e864722678f4a0e1b64570c7fe?auth_key=1626283328-0-0-8aa72bd4ba852e9f1855352b30694da0" />
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/preloadUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_drawable"
+            android:textColor="#ffffff"
+            android:layout_marginTop="10dp"
+            android:text="预加载URL" />
+
+        <Button
+            android:id="@+id/playPreLoadUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_drawable"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="播放URL" />
+    </LinearLayout>
+        <EditText
+            android:id="@+id/edit_input_preurl"
+            android:layout_width="match_parent"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_height="wrap_content"
+            android:hint="输入播放地址"
+            android:singleLine="true"
+            android:text="https://vv.qianpailive.com/7452/20210714/d0ddbe5bc1ed7155dc838ac2617e18e9?auth_key=1626283328-0-0-1c0f2094de201fbe1ec41f82baa88fbd" />
+
+
+    </LinearLayout>
+
 
 </RelativeLayout>

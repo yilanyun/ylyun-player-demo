@@ -29,4 +29,9 @@ public class SimplePageActivity extends AppCompatActivity {
     public void simpleDetail(View view) {
         NewPageActivity.start(this,NewPageActivity.SIMPLE_WITH_CONTROL);
     }
+
+    public void simplePlayer2(View view) {
+        NewPageActivity.start(this,NewPageActivity.SIMPLE_VIEW);
+    }
+
 }

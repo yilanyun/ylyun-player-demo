@@ -9,27 +9,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
-import com.yilan.sdk.common.util.FSScreen;
 import com.yilan.sdk.common.util.ToastUtil;
-import com.yilan.sdk.player.ylplayer.PlayerStyle;
+import com.yilan.sdk.player.PlayerEngineView;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.callback.OnSimplePlayerCallBack;
-import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
-import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.sdkdemo.MockData;
 import com.yilan.sdk.sdkdemo.R;
 
-public class SimpleFragment extends Fragment {
+public class SimpleViewFragment extends Fragment {
 
-    IYLPlayer playerEngine;
-    FrameLayout playerContainer;
+    PlayerEngineView playerView;
     EditText editText;
     EditText preEditText;
 
-    public static SimpleFragment newInstance() {
-        SimpleFragment fragment = new SimpleFragment();
+    public static SimpleViewFragment newInstance() {
+        SimpleViewFragment fragment = new SimpleViewFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -45,34 +40,24 @@ public class SimpleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_player, container, false);
+        return inflater.inflate(R.layout.activity_player2, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        /**
-         * playerContainer 用于放置播放器的容器
-         */
-        playerContainer = view.findViewById(R.id.player_container);
+
         editText = view.findViewById(R.id.edit_input_url);
         preEditText = view.findViewById(R.id.edit_input_preurl);
         /**
-         * 在playerContainer中创建播放器
-         * 如果需要使用预加载功能，通过此方法创建播放器引擎 YLPlayerFactory.createMultiEngine(playerContainer);
-         * 通过 YLPlayerFactory.createSimpleEngine(playerContainer)创建播放器会更加节省内存
+         * 在布局中直接使用 PlayerEngineView 来播放视频
+         * 可以将PlayerEngineView 作为封面ImageView的父容器来使用，也可以单独使用 {@link R.layout.activity_player2}
+         * PlayerEngineView 的功能接口和Engine基本想同
          */
-        playerEngine = YLPlayerFactory.createEngine(playerContainer);
+        playerView = view.findViewById(R.id.view_playerView);
 
 
-        playerContainer.post(new Runnable() {
-            @Override
-            public void run() {
-                ViewGroup.LayoutParams params = playerContainer.getLayoutParams();
-                params.height = FSScreen.getScreenWidth() * 9 / 16;
-                playerContainer.setLayoutParams(params);
-            }
-        });
+
         /**
          *
          * 调用play播放视频
@@ -81,12 +66,11 @@ public class SimpleFragment extends Fragment {
          * title：可选参数，若传入此参数，将会在 controller 的ui上显示，详见 {@link SimpleWithControllerFragment}
          * url:视频地址
          * coverID：该视频的封面 的view，在视频播放时，会将该view隐藏，可选参数
-         * playerContainer ：该视频所应该出现的位置，通常时 封面 view 的父布局
          */
-        playerEngine.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build(), playerContainer);
+        playerView.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build());
 
 
-        playerEngine.setPlayerCallBack(new OnSimplePlayerCallBack() {
+        playerView.setPlayerCallBack(new OnSimplePlayerCallBack() {
             @Override
             public void onError(String pager, String videoID, String taskID) {
                 super.onError(pager, videoID, taskID);
@@ -113,33 +97,33 @@ public class SimpleFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (playerEngine != null) {
+        if (playerView != null) {
             /**
              * 暂停
              */
-            playerEngine.pause();
+            playerView.pause();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (playerEngine != null) {
+        if (playerView != null) {
             /**
              * 续播
              */
-            playerEngine.resume();
+            playerView.resume();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (playerEngine != null) {
+        if (playerView != null) {
             /**
              * 释放播放器
              */
-            playerEngine.release();
+            playerView.release();
         }
     }
 
@@ -147,8 +131,8 @@ public class SimpleFragment extends Fragment {
      * 点击播放
      */
     public void onPlay() {
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (playerView != null) {
+            playerView.resume();
         }
     }
 
@@ -156,8 +140,8 @@ public class SimpleFragment extends Fragment {
      * 点击暂停
      */
     public void onPauseClick() {
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (playerView != null) {
+            playerView.pause();
         }
     }
 
@@ -167,7 +151,7 @@ public class SimpleFragment extends Fragment {
     public void playWithUrl() {
         String url = editText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).cacheEnable(true).title("视频标题").playerStyle(PlayerStyle.STYLE_MATCH).build(), playerContainer);
+            playerView.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).build());
         }
     }
 
@@ -177,14 +161,14 @@ public class SimpleFragment extends Fragment {
             /**
              * 在视频播放前，可通过此方法预加载视频
              */
-            playerEngine.prePlay(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build());
+            playerView.prePlay(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build());
         }
     }
 
     public void playPreLoadUrl() {
         String url = preEditText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build(), playerContainer);
+            playerView.play(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build());
         }
     }
 }

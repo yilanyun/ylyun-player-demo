@@ -46,6 +46,12 @@ public class MainActivity extends AppCompatActivity {
                 PlayerCustomUIActivity.start(MainActivity.this);
             }
         });
+        findViewById(R.id.player_seamless).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlayerListActivity.start(v.getContext());
+            }
+        });
     }
 
 }

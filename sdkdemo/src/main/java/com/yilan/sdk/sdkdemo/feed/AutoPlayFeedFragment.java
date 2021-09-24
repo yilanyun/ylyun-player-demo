@@ -114,7 +114,7 @@ public class AutoPlayFeedFragment extends Fragment {
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof FeedViewHolder) {
             currentMedia = feedMedia;
-            playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).playerStyle(PlayerStyle.STYLE_16_9).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
+            playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).playerStyle(PlayerStyle.STYLE_MATCH).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
         }
     }
 

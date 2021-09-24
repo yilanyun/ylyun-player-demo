@@ -10,10 +10,20 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:background="@drawable/button_drawable"
+        android:onClick="simplePlayer2"
+        android:textColor="#ffffff"
+        android:layout_marginTop="15dp"
+        android:text="使用 PlayerEngineView 播放" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:background="@drawable/button_drawable"
         android:onClick="simplePlayer"
         android:textColor="#ffffff"
         android:layout_marginTop="15dp"
-        android:text="简单播放" />
+        android:text="使用 Engine 播放" />
 
     <Button
         android:layout_width="match_parent"
