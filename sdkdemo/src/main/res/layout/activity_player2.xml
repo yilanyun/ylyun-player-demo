@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.yilan.sdk.player.PlayerEngineView
+        android:id="@+id/player"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#000">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.yilan.sdk.player.PlayerEngineView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/player">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 这是播放详情页 "
+            android:textSize="20sp" />
+
+    </ScrollView>
+
+</RelativeLayout>

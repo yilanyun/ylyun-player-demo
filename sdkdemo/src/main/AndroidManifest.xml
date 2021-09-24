@@ -19,6 +19,9 @@
             android:name=".NewPageActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout" />
         <activity
+            android:name=".customui.PlayerCustomUIActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout" />
+        <activity
             android:name=".simple.SimplePageActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout" />
         <activity

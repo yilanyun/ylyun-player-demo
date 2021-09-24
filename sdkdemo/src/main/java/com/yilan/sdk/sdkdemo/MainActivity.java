@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.yilan.sdk.sdkdemo.customui.PlayerCustomUIActivity;
 import com.yilan.sdk.sdkdemo.simple.SimplePageActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.player_switch).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PlayerCustomUIActivity.start(MainActivity.this);
             }
         });
     }
