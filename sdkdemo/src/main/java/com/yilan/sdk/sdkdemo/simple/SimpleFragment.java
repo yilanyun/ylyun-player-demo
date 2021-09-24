@@ -24,7 +24,7 @@ import com.yilan.sdk.sdkdemo.R;
 public class SimpleFragment extends Fragment {
 
     IYLPlayer playerEngine;
-    FrameLayout playerContainer;
+    FrameLayout anchorView;
     EditText editText;
     EditText preEditText;
 
@@ -52,25 +52,24 @@ public class SimpleFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         /**
-         * playerContainer 用于放置播放器的容器
+         * 需要播放视频的view，在播放时 通过play() 方法传给播放器，视频画面即会附着在此view上
          */
-        playerContainer = view.findViewById(R.id.player_container);
+        anchorView = view.findViewById(R.id.player_container);
         editText = view.findViewById(R.id.edit_input_url);
         preEditText = view.findViewById(R.id.edit_input_preurl);
         /**
          * 在playerContainer中创建播放器
-         * 如果需要使用预加载功能，通过此方法创建播放器引擎 YLPlayerFactory.createMultiEngine(playerContainer);
-         * 通过 YLPlayerFactory.createSimpleEngine(playerContainer)创建播放器会更加节省内存
+         * YLPlayerFactory.createEngine(context)通过上下文创建播放器
          */
-        playerEngine = YLPlayerFactory.createEngine(playerContainer);
+        playerEngine = YLPlayerFactory.createEngine(view.getContext());
 
 
-        playerContainer.post(new Runnable() {
+        anchorView.post(new Runnable() {
             @Override
             public void run() {
-                ViewGroup.LayoutParams params = playerContainer.getLayoutParams();
+                ViewGroup.LayoutParams params = anchorView.getLayoutParams();
                 params.height = FSScreen.getScreenWidth() * 9 / 16;
-                playerContainer.setLayoutParams(params);
+                anchorView.setLayoutParams(params);
             }
         });
         /**
@@ -80,10 +79,10 @@ public class SimpleFragment extends Fragment {
          * videoID：视频的id，要保证和视频对应
          * title：可选参数，若传入此参数，将会在 controller 的ui上显示，详见 {@link SimpleWithControllerFragment}
          * url:视频地址
-         * coverID：该视频的封面 的view，在视频播放时，会将该view隐藏，可选参数
-         * playerContainer ：该视频所应该出现的位置，通常时 封面 view 的父布局
+         * coverID：该视频的封面的view 的id，在视频播放时，会将该view隐藏，可选参数
+         * anchorView ：需要播放视频的viewgroup，视频画面会附着在此view 上，注：如果设置了coverID，则anchorView应该时封面view 的父布局
          */
-        playerEngine.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build(), playerContainer);
+        playerEngine.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build(), anchorView);
 
 
         playerEngine.setPlayerCallBack(new OnSimplePlayerCallBack() {
@@ -167,7 +166,7 @@ public class SimpleFragment extends Fragment {
     public void playWithUrl() {
         String url = editText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).cacheEnable(true).title("视频标题").playerStyle(PlayerStyle.STYLE_MATCH).build(), playerContainer);
+            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).cacheEnable(true).title("视频标题").playerStyle(PlayerStyle.STYLE_MATCH).build(), anchorView);
         }
     }
 
@@ -184,7 +183,7 @@ public class SimpleFragment extends Fragment {
     public void playPreLoadUrl() {
         String url = preEditText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build(), playerContainer);
+            playerEngine.play(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build(), anchorView);
         }
     }
 }
