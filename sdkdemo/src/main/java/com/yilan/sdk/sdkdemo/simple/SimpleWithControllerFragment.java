@@ -62,6 +62,9 @@ public class SimpleWithControllerFragment extends Fragment {
          * YLPlayerFactory.createEngine(context)
          */
         playerEngine = YLPlayerFactory.createEngine(view.getContext())
+                /**
+                 * 给播放器设置控制器，此处使用了两种控制器组合
+                 */
                 .withController(new PGCPlayerUI().itemUI(new TouchPlayerUI()));
         /**
          *
