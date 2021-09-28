@@ -24,7 +24,7 @@ public class FloatPlayerActivity extends AppCompatActivity {
 
     PlayerEngineView player;
     FrameLayout playerContainer;
-    String videoId = "floatplayeractivity-testid";
+    String videoId = "floatplayeractivity";
     TaskInfo taskInfo;
     private FloatManager floatManager;
 

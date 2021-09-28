@@ -8,10 +8,8 @@ import com.yilan.sdk.sdkdemo.App;
 import com.yilan.sdk.sdkdemo.Utils;
 
 /**
- * 悬浮播放
- * Created by dueeeke on 2018/3/30.
+ * 悬浮窗管理类
  */
-
 public class FloatManager {
 
     private static FloatManager instance;
