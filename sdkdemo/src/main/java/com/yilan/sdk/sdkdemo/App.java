@@ -13,10 +13,11 @@ public class App extends Application {
 
     public static final String TAG = "YL_AD_CALLBACK";
     public static final String TAG_LITTLE = "YL_VIDEO_CALLBACK";
-
+    public static App instance;
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
         FSLogcat.DEBUG = true;
         YLInit.getInstance()
                 .setApplication(this)
@@ -37,5 +38,9 @@ public class App extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+    }
+
+    public static App getInstance() {
+        return instance;
     }
 }

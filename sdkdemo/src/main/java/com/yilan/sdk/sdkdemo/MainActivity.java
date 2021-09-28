@@ -1,10 +1,12 @@
 package com.yilan.sdk.sdkdemo;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.yilan.sdk.sdkdemo.customui.PlayerCustomUIActivity;
+import com.yilan.sdk.sdkdemo.floatwindow.FloatPlayerActivity;
 import com.yilan.sdk.sdkdemo.simple.SimplePageActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PlayerListActivity.start(v.getContext());
+            }
+        });
+        findViewById(R.id.player_float).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FloatPlayerActivity.start(v.getContext());
             }
         });
     }

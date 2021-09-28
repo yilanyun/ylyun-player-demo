@@ -79,6 +79,17 @@
         android:textColor="#ffffff"
         android:textSize="15sp" />
 
+    <TextView
+        android:id="@+id/player_float"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_drawable"
+        android:gravity="center"
+        android:text="小窗口播放示例"
+        android:textColor="#ffffff"
+        android:textSize="15sp" />
+
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"

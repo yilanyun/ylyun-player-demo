@@ -107,14 +107,23 @@ public class AutoPlayFeedFragment extends Fragment {
         ViewGroup playerContainer = viewRoot.findViewById(R.id.feed_player_container_inner);
         playerEngine = YLPlayerFactory.createEngine(playerContainer)
                 .videoLoop(false).withController(new PGCPlayerUI());
-        playVideo(mockFeed.get(0),0);
+        recyclerView.post(new Runnable() {
+            @Override
+            public void run() {
+                playVideo(mockFeed.get(0),0);
+            }
+        });
     }
 
     private void playVideo(FeedMedia feedMedia, int position) {
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof FeedViewHolder) {
             currentMedia = feedMedia;
-            playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).playerStyle(PlayerStyle.STYLE_MATCH).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
+            playerEngine.play(new TaskInfo.Builder()
+                    .url(feedMedia.url)
+                    .coverID(R.id.layout_content)
+                    .playerStyle(PlayerStyle.STYLE_MATCH)
+                    .videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
         }
     }
 
