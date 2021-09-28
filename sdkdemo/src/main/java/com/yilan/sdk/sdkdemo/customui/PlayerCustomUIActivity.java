@@ -31,6 +31,7 @@ public class PlayerCustomUIActivity extends AppCompatActivity {
         player = findViewById(R.id.player);
         //设置播放器UI
         player.withController(new CustomPlayerUI());
+        player.videoLoop(true);
         playVideo();
     }
 
