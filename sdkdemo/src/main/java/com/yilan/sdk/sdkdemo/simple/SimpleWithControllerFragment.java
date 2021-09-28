@@ -20,9 +20,9 @@ import com.yilan.sdk.sdkdemo.R;
 public class SimpleWithControllerFragment extends Fragment {
 
     IYLPlayer playerEngine;
-    FrameLayout playerContainer;
+    FrameLayout anchorView;
 
-    FrameLayout playerContainer2;
+    FrameLayout anchorView2;
 
     public SimpleWithControllerFragment() {
     }
@@ -52,15 +52,19 @@ public class SimpleWithControllerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         /**
-         * playerContainer 用于放置播放器的容器
+         *  需要播放视频的view，在播放时 通过play() 方法传给播放器，视频画面即会附着在此view上
          */
-        playerContainer = view.findViewById(R.id.player_container);
+        anchorView = view.findViewById(R.id.player_container);
+
+        anchorView2 = view.findViewById(R.id.player_container2);
         /**
-         * 在playerContainer中创建播放器
-         * 如果需要使用预加载功能，通过此方法创建播放器引擎 YLPlayerFactory.createMultiEngine(playerContainer);
-         * 通过 YLPlayerFactory.createSimpleEngine(playerContainer)创建播放器会更加节省内存
+         * 创建播放器
+         * YLPlayerFactory.createEngine(context)
          */
-        playerEngine = YLPlayerFactory.createEngine(playerContainer)
+        playerEngine = YLPlayerFactory.createEngine(view.getContext())
+                /**
+                 * 给播放器设置控制器，此处使用了两种控制器组合
+                 */
                 .withController(new PGCPlayerUI().itemUI(new TouchPlayerUI()));
         /**
          *
@@ -69,37 +73,25 @@ public class SimpleWithControllerFragment extends Fragment {
          * title：可选参数，若传入此参数，将会在 controller 的ui上显示，详见 {@link SimpleWithControllerFragment}
          * url:视频地址
          * coverID：该视频的封面 的view，在视频播放时，会将该view隐藏，可选参数
-         * playerContainer ：该视频所应该出现的位置，通常时 封面 view 的父布局
          */
         TaskInfo info = new TaskInfo.Builder().videoID("1111111111").coverID(R.id.img_cover).url(MockData.getPlayerUrl()).title("视频1").build();
 
         /**
          * 调用play播放视频
+         * anchorView ：需要播放视频的viewgroup，视频画面会附着在此view 上，注：如果设置了coverID，则anchorView应该时封面view 的父布局
          */
-        playerEngine.play(info, playerContainer);
+        playerEngine.play(info, anchorView);
         final TaskInfo info2 = new TaskInfo.Builder().videoID("222222222").coverID(R.id.img_cover2).title("视频2").url(MockData.getPlayerUrl(1)).build();
         view.findViewById(R.id.img_cover).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
-                 * changeContainer 修改播放器的容器
-                 * 在播放新的视频时，如果播放器的容器与上次播放时不同，或与创建时的容器不同，需要调用此方法
-                 */
-                playerEngine.changeContainer(playerContainer);
-                playerEngine.play(info, playerContainer);
+                playerEngine.play(info, anchorView);
             }
         });
-
-        playerContainer2 = view.findViewById(R.id.player_container2);
         view.findViewById(R.id.img_cover2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /**
-                 * changeContainer 修改播放器的容器
-                 * 在播放新的视频时，如果播放器的容器不一样，需要调用此方法
-                 */
-                playerEngine.changeContainer(playerContainer2);
-                playerEngine.play(info2, playerContainer2);
+                playerEngine.play(info2, anchorView2);
             }
         });
     }

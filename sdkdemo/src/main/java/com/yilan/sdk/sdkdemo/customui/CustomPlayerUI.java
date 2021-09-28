@@ -93,9 +93,7 @@ public class CustomPlayerUI extends AbsYLPlayerUI implements SeekBar.OnSeekBarCh
         return rootView;
     }
 
-    @Override
     public void showOrHideControllerUI() {
-        super.showOrHideControllerUI();
         if (uiController.getVisibility() == View.VISIBLE) {
             uiController.setVisibility(View.INVISIBLE);
             uiController.startAnimation(alphaAnimation(1, 0));
@@ -187,7 +185,7 @@ public class CustomPlayerUI extends AbsYLPlayerUI implements SeekBar.OnSeekBarCh
     }
 
     /**
-     * 播放器UI需要重置的回调。
+     * 播放器UI需要重置。
      */
     @Override
     public void resetUI() {

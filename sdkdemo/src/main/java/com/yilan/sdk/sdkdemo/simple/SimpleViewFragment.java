@@ -17,6 +17,9 @@ import com.yilan.sdk.player.ylplayer.callback.OnSimplePlayerCallBack;
 import com.yilan.sdk.sdkdemo.MockData;
 import com.yilan.sdk.sdkdemo.R;
 
+/**
+ * 通过PlayerEngineView 播放视频
+ */
 public class SimpleViewFragment extends Fragment {
 
     PlayerEngineView playerView;
@@ -53,6 +56,7 @@ public class SimpleViewFragment extends Fragment {
          * 在布局中直接使用 PlayerEngineView 来播放视频
          * 可以将PlayerEngineView 作为封面ImageView的父容器来使用，也可以单独使用 {@link R.layout.activity_player2}
          * PlayerEngineView 的功能接口和Engine基本想同
+         * 它是一个FrameLayout，可以将视频封面等放在此布局下面
          */
         playerView = view.findViewById(R.id.view_playerView);
 
@@ -67,7 +71,7 @@ public class SimpleViewFragment extends Fragment {
          * url:视频地址
          * coverID：该视频的封面 的view，在视频播放时，会将该view隐藏，可选参数
          */
-        playerView.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build());
+        playerView.play(new TaskInfo.Builder().videoID("adfadffwe").coverID(R.id.img_cover).title("测试视频").url(MockData.getPlayerUrl()).build());
 
 
         playerView.setPlayerCallBack(new OnSimplePlayerCallBack() {

@@ -16,7 +16,6 @@ import com.yilan.sdk.common.ui.recycle.BaseViewHolder;
 import com.yilan.sdk.common.ui.recycle.IViewHolderCreator;
 import com.yilan.sdk.common.ui.recycle.ViewAttachedToWindowListener;
 import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
-import com.yilan.sdk.player.ylplayer.PlayerState;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 import com.yilan.sdk.player.ylplayer.engine.YLCloudPlayerEngine;
@@ -88,11 +87,14 @@ public class FeedFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         adapter.setDataList(MockData.getMockFeed());
         /**
-         * 用于存放播放器的容器
+         * 用于创建播放器的容器
          */
         ViewGroup playerContainer = viewRoot.findViewById(R.id.feed_player_container_inner);
         /**
-         * 创建播放器
+         * 通过playerContainer创建播放器
+         * playerContainer 的宽高是match_parent
+         * 通过createEngine(ViewGroup)创建的播放器，在列表中频繁切换播放的视频时可减少 视频 因位置频繁切换导致的卡顿问题，提升流畅性
+         * 因此我们建议在列表播放的场景中，使用此方法来创建播放器
          */
         playerEngine = new YLCloudPlayerEngine(YLPlayerFactory.createEngine(playerContainer))
                 .videoLoop(false).withController(new PGCPlayerUI());
@@ -102,7 +104,6 @@ public class FeedFragment extends Fragment {
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof FeedViewHolder) {
             currentMedia = feedMedia;
-            playerEngine.changeContainer(((FeedViewHolder) holder).contentContainer);
             playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
         }
     }

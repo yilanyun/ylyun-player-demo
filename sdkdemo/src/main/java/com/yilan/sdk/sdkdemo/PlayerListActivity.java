@@ -19,7 +19,6 @@ import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
 import com.yilan.sdk.player.ylplayer.PlayerState;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
-import com.yilan.sdk.player.ylplayer.engine.YLCloudPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.HybridPlayerUI;
 import com.yilan.sdk.sdkdemo.feed.FeedItemDecoration;
@@ -55,7 +54,7 @@ public class PlayerListActivity extends AppCompatActivity {
          * 创建播放器，通过YLPlayerFactory.createEngine()创建后，需要通过 YLPlayerFactory.makeCloudEngine 让播放器具备跨页面能力
          */
         container = findViewById(R.id.player_container);
-        playerEngine = YLPlayerFactory.makeCloudEngine(YLPlayerFactory.createEngine(container)).withController(new HybridPlayerUI());
+        playerEngine = YLPlayerFactory.createCloudEngine(container).withController(new HybridPlayerUI());
         manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.addItemDecoration(new FeedItemDecoration());

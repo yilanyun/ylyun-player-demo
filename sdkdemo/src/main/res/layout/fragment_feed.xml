@@ -6,7 +6,6 @@
     <FrameLayout
         android:id="@+id/feed_player_container_inner"
         android:layout_width="match_parent"
-        android:layerType="hardware"
         android:layout_height="match_parent" />
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_video"

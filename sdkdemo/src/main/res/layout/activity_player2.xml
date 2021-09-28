@@ -3,13 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
+
     <com.yilan.sdk.player.PlayerEngineView
         android:id="@+id/view_playerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="210dp">
+
         <ImageView
             android:id="@+id/img_cover"
             android:layout_width="match_parent"
+            android:src="@drawable/video_cover"
             android:layout_height="match_parent"
             android:scaleType="centerCrop" />
     </com.yilan.sdk.player.PlayerEngineView>
