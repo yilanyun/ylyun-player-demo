@@ -26,6 +26,7 @@ import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
+import com.yilan.sdk.player.ylplayer.engine.YLVideoService;
 import com.yilan.sdk.player.ylplayer.ui.UGCPlayerUI;
 import com.yilan.sdk.sdkdemo.MockData;
 import com.yilan.sdk.sdkdemo.R;
@@ -182,6 +183,7 @@ public class UgcFeedFragment extends Fragment {
              */
             TaskInfo taskInfo = new TaskInfo.Builder()
                     .videoID(feedMedia.videoId)
+                    .title(feedMedia.title)
                     .url(feedMedia.url)
                     .coverID(R.id.little_video_cover)
                     .playerStyle(PlayerStyle.STYLE_MATCH)
@@ -216,7 +218,7 @@ public class UgcFeedFragment extends Fragment {
     }
 
     /**
-     * 视频预缓存，通过 YLMultiPlayerEngine.PreVideo.instance().preLoadVideo
+     * 视频预缓存，通过 YLVideoService.preLoadVideo()
      * 来进行视频的预缓存功能，以便切换到下个视频时能快速起播
      *
      * @param position
@@ -224,8 +226,7 @@ public class UgcFeedFragment extends Fragment {
     private void cacheVideo(int position) {
         if (position >= 0 && position < mockMediaList.size()
                 && !TextUtils.isEmpty((mockMediaList.get(position).videoId))) {
-            YLMultiPlayerEngine.PreVideo.instance().
-                    preLoadVideo(mockMediaList.get(position).videoId, mockMediaList.get(position).url);
+            YLVideoService.preLoadVideo(mockMediaList.get(position).videoId, mockMediaList.get(position).url);
         }
     }
 
