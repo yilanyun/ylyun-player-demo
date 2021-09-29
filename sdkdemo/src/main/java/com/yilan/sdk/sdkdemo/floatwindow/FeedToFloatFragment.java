@@ -82,10 +82,9 @@ public class FeedToFloatFragment extends Fragment {
                     public void onViewAttachedToWindow(BaseViewHolder holder) {
                         if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE
                                 && currentMedia == holder.getData()) {
+                            holder.setIsRecyclable(true);
                             floatManager.stopFloatWindow();
-                            playerEngine.changeContainer(playerContainer);
-                            playerEngine.changeAnchorView(((FeedViewHolder) holder).contentContainer, R.id.layout_content);
-                            playVideo(currentMedia, null, position);
+                            playVideo(currentMedia, null, holder.getViewHolderPosition());
                         }
                     }
 
@@ -93,6 +92,7 @@ public class FeedToFloatFragment extends Fragment {
                     public void onViewDetachedFromWindow(BaseViewHolder holder) {
                         if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE
                                 && currentMedia == holder.getData()) {
+                            holder.setIsRecyclable(false);
                             floatManager.startFloatWindow(new TaskInfo.Builder().url(currentMedia.url).coverID(R.id.layout_content).videoID(currentMedia.videoId).build());
                         }
                     }
