@@ -18,7 +18,7 @@ import com.yilan.sdk.common.ui.recycle.ViewAttachedToWindowListener;
 import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
 import com.yilan.sdk.player.ylplayer.PlayerState;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
-import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
+import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.HybridPlayerUI;
 import com.yilan.sdk.sdkdemo.feed.FeedItemDecoration;
@@ -33,7 +33,7 @@ import java.util.List;
 public class PlayerListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     LinearLayoutManager manager;
-    IYLPlayerEngine playerEngine;
+    IYLPlayer player;
     private int position;
     private ViewGroup container;
     List<FeedMedia> mockFeed;
@@ -54,7 +54,7 @@ public class PlayerListActivity extends AppCompatActivity {
          * 创建播放器，通过YLPlayerFactory.createEngine()创建后，需要通过 YLPlayerFactory.makeCloudEngine 让播放器具备跨页面能力
          */
         container = findViewById(R.id.player_container);
-        playerEngine = YLPlayerFactory.createCloudEngine(container).withController(new HybridPlayerUI());
+        player = YLPlayerFactory.createCloudEngine(container).withController(new HybridPlayerUI());
         manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
         recyclerView.addItemDecoration(new FeedItemDecoration());
@@ -70,8 +70,8 @@ public class PlayerListActivity extends AppCompatActivity {
                         /**
                          * 点击视频开始播放，再次点击则跳转到下一页
                          */
-                        if (playerEngine.getPlayerState().value >= PlayerState.PREPARING.value
-                                && playerEngine.getPlayerState().value < PlayerState.STOP.value&&PlayerListActivity.this.position==position) {
+                        if (player.getPlayerState().value >= PlayerState.PREPARING.value
+                                && player.getPlayerState().value < PlayerState.STOP.value&&PlayerListActivity.this.position==position) {
                             onViewClick(position);
                         } else {
                             playVideo(position);
@@ -92,7 +92,7 @@ public class PlayerListActivity extends AppCompatActivity {
                          */
                         if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE
                                 && currentMedia == holder.getData()) {
-                            playerEngine.stop();
+                            player.stop();
                         }
                     }
                 });
@@ -123,7 +123,7 @@ public class PlayerListActivity extends AppCompatActivity {
                 .title("测试视频")
                 .url(currentMedia.url)
                 .build();
-        playerEngine.play(taskInfo, holder.contentContainer);
+        player.play(taskInfo, holder.contentContainer);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class PlayerListActivity extends AppCompatActivity {
             transition.addListener(new Transition.TransitionListener() {
                 @Override
                 public void onTransitionEnd(Transition transition) {
-                    if (playerEngine != null) {
+                    if (player != null) {
                         /**
                          * 从上个页面返回时，transition!=null 成立，当动画执行完毕后，重新调用play()或者 2.changeContainer + changeAnchorView
                          * 注意：play（） 不仅有播放的能力，还会负责检测当前container 和achorView是否正确，将播放器归位
@@ -178,24 +178,24 @@ public class PlayerListActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (player != null) {
+            player.resume();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (player != null) {
+            player.pause();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (playerEngine != null) {
-            playerEngine.release();
+        if (player != null) {
+            player.release();
         }
     }
 }

@@ -19,7 +19,7 @@ import com.yilan.sdk.sdkdemo.R;
 
 public class SimpleWithControllerFragment extends Fragment {
 
-    IYLPlayer playerEngine;
+    IYLPlayer player;
     FrameLayout anchorView;
 
     FrameLayout anchorView2;
@@ -61,7 +61,7 @@ public class SimpleWithControllerFragment extends Fragment {
          * 创建播放器
          * YLPlayerFactory.createEngine(context)
          */
-        playerEngine = YLPlayerFactory.createEngine(view.getContext())
+        player = YLPlayerFactory.createEngine(view.getContext())
                 /**
                  * 给播放器设置控制器，此处使用了两种控制器组合
                  */
@@ -80,18 +80,18 @@ public class SimpleWithControllerFragment extends Fragment {
          * 调用play播放视频
          * anchorView ：需要播放视频的viewgroup，视频画面会附着在此view 上，注：如果设置了coverID，则anchorView应该时封面view 的父布局
          */
-        playerEngine.play(info, anchorView);
+        player.play(info, anchorView);
         final TaskInfo info2 = new TaskInfo.Builder().videoID("222222222").coverID(R.id.img_cover2).title("视频2").url(MockData.getPlayerUrl(1)).build();
         view.findViewById(R.id.img_cover).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playerEngine.play(info, anchorView);
+                player.play(info, anchorView);
             }
         });
         view.findViewById(R.id.img_cover2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playerEngine.play(info2, anchorView2);
+                player.play(info2, anchorView2);
             }
         });
     }
@@ -99,16 +99,16 @@ public class SimpleWithControllerFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (player != null) {
+            player.pause();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (player != null) {
+            player.resume();
         }
     }
 
@@ -118,8 +118,8 @@ public class SimpleWithControllerFragment extends Fragment {
         /**
          * 页面关闭时，需要销毁播放器
          */
-        if (playerEngine != null) {
-            playerEngine.release();
+        if (player != null) {
+            player.release();
         }
     }
 }

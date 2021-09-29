@@ -68,7 +68,7 @@ public class FloatPlayerActivity extends AppCompatActivity {
     private void setFloatWindowDialog() {
         new AlertDialog.Builder(this)
                 .setTitle("启用悬浮窗")//这里是表头的内容
-                .setMessage("为了模拟定位的稳定性，建议开启\"显示悬浮窗\"选项")//这里是中间显示的具体信息
+                .setMessage("悬浮窗播放功能，需要悬浮窗权限，请开启\"显示悬浮窗\"选项")//这里是中间显示的具体信息
                 .setPositiveButton("设置",//这个string是设置左边按钮的文字
                         new DialogInterface.OnClickListener() {
                             @Override
