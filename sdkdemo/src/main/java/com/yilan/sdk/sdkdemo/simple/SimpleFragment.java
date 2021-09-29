@@ -23,7 +23,7 @@ import com.yilan.sdk.sdkdemo.R;
 
 public class SimpleFragment extends Fragment {
 
-    IYLPlayer playerEngine;
+    IYLPlayer player;
     FrameLayout anchorView;
     EditText editText;
     EditText preEditText;
@@ -61,7 +61,7 @@ public class SimpleFragment extends Fragment {
          * 在playerContainer中创建播放器
          * YLPlayerFactory.createEngine(context)通过上下文创建播放器
          */
-        playerEngine = YLPlayerFactory.createEngine(view.getContext());
+        player = YLPlayerFactory.createEngine(view.getContext());
 
 
         anchorView.post(new Runnable() {
@@ -82,10 +82,10 @@ public class SimpleFragment extends Fragment {
          * coverID：该视频的封面的view 的id，在视频播放时，会将该view隐藏，可选参数
          * anchorView ：需要播放视频的viewgroup，视频画面会附着在此view 上，注：如果设置了coverID，则anchorView应该时封面view 的父布局
          */
-        playerEngine.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build(), anchorView);
+        player.play(new TaskInfo.Builder().videoID("adfadffwe").title("测试视频").url(MockData.getPlayerUrl()).build(), anchorView);
 
 
-        playerEngine.setPlayerCallBack(new OnSimplePlayerCallBack() {
+        player.setPlayerCallBack(new OnSimplePlayerCallBack() {
             @Override
             public void onError(String pager, String videoID, String taskID) {
                 super.onError(pager, videoID, taskID);
@@ -112,33 +112,33 @@ public class SimpleFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (playerEngine != null) {
+        if (player != null) {
             /**
              * 暂停
              */
-            playerEngine.pause();
+            player.pause();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (playerEngine != null) {
+        if (player != null) {
             /**
              * 续播
              */
-            playerEngine.resume();
+            player.resume();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (playerEngine != null) {
+        if (player != null) {
             /**
              * 释放播放器
              */
-            playerEngine.release();
+            player.release();
         }
     }
 
@@ -146,8 +146,8 @@ public class SimpleFragment extends Fragment {
      * 点击播放
      */
     public void onPlay() {
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (player != null) {
+            player.resume();
         }
     }
 
@@ -155,8 +155,8 @@ public class SimpleFragment extends Fragment {
      * 点击暂停
      */
     public void onPauseClick() {
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (player != null) {
+            player.pause();
         }
     }
 
@@ -166,7 +166,7 @@ public class SimpleFragment extends Fragment {
     public void playWithUrl() {
         String url = editText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).cacheEnable(true).title("视频标题").playerStyle(PlayerStyle.STYLE_MATCH).build(), anchorView);
+            player.play(new TaskInfo.Builder().videoID("playurl").url(url).coverID(R.id.img_cover).cacheEnable(true).title("视频标题").playerStyle(PlayerStyle.STYLE_MATCH).build(), anchorView);
         }
     }
 
@@ -176,14 +176,14 @@ public class SimpleFragment extends Fragment {
             /**
              * 在视频播放前，可通过此方法预加载视频
              */
-            playerEngine.prePlay(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build());
+            player.prePlay(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build());
         }
     }
 
     public void playPreLoadUrl() {
         String url = preEditText.getText().toString();
         if (!TextUtils.isEmpty(url)) {
-            playerEngine.play(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build(), anchorView);
+            player.play(new TaskInfo.Builder().videoID("preplayer001").url(url).coverID(R.id.img_cover).build(), anchorView);
         }
     }
 }

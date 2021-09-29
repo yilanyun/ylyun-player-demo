@@ -24,7 +24,6 @@ import com.yilan.sdk.player.ylplayer.PlayerState;
 import com.yilan.sdk.player.ylplayer.PlayerStyle;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
-import com.yilan.sdk.player.ylplayer.engine.YLMultiPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.engine.YLVideoService;
 import com.yilan.sdk.player.ylplayer.ui.UGCPlayerUI;
@@ -42,7 +41,7 @@ import java.util.List;
 public class UgcFeedFragment extends Fragment {
 
     //播放器引擎
-    IYLPlayer playerEngine;
+    IYLPlayer player;
     //播放器容器
     ViewGroup playerContainer;
     RecyclerView recyclerView;
@@ -96,7 +95,7 @@ public class UgcFeedFragment extends Fragment {
      * 是与recyclerView处于同一级的，并不是每个item
      */
     private void initPlayerEngine() {
-        playerEngine = YLPlayerFactory
+        player = YLPlayerFactory
                 .createEngine(playerContainer)
                 .videoLoop(true)
                 //播放器的控制UI
@@ -121,9 +120,9 @@ public class UgcFeedFragment extends Fragment {
              */
             @Override
             public void onClick(View view, int i, FeedMedia feedMedia) {
-                if (playerEngine.getPlayerState() == PlayerState.PAUSE) {
+                if (player.getPlayerState() == PlayerState.PAUSE) {
                     resumeVideo();
-                } else if (playerEngine.getPlayerState() == PlayerState.START || playerEngine.getPlayerState() == PlayerState.RESUME) {
+                } else if (player.getPlayerState() == PlayerState.START || player.getPlayerState() == PlayerState.RESUME) {
                     pauseVideo();
                 }
             }
@@ -167,7 +166,7 @@ public class UgcFeedFragment extends Fragment {
      */
     private void playVideos(FeedMedia feedMedia, int position) {
         if (feedMedia == null || position >= mockMediaList.size()) {
-            playerEngine.stop();
+            player.stop();
             return;
         }
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
@@ -190,7 +189,7 @@ public class UgcFeedFragment extends Fragment {
                     .build();
             // holder.itemView 作为锚点view传入，当列表滑动过程中，当前视频会跟随锚点view进行滑动
             // 需要注意的是，播放时传入的view是每个item的根view或其子view
-            playerEngine.play(taskInfo, (ViewGroup) holder.itemView);
+            player.play(taskInfo, (ViewGroup) holder.itemView);
         } else {
             System.out.println(" >>>>>>>>>>>>>  播放错误  <<<<<<<<<<<");
         }
@@ -241,8 +240,8 @@ public class UgcFeedFragment extends Fragment {
      * 暂停播放
      */
     private void pauseVideo() {
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (player != null) {
+            player.pause();
         }
     }
 
@@ -256,8 +255,8 @@ public class UgcFeedFragment extends Fragment {
      * 恢复播放
      */
     private void resumeVideo() {
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (player != null) {
+            player.resume();
         }
     }
 
@@ -267,8 +266,8 @@ public class UgcFeedFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (playerEngine != null) {
-            playerEngine.release();
+        if (player != null) {
+            player.release();
         }
     }
 }

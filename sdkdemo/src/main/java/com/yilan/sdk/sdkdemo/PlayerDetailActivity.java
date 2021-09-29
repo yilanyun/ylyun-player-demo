@@ -11,7 +11,7 @@ import android.transition.Transition;
 import android.widget.FrameLayout;
 
 import com.yilan.sdk.player.ylplayer.TaskInfo;
-import com.yilan.sdk.player.ylplayer.engine.IYLPlayerEngine;
+import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.PGCPlayerUI;
 
@@ -19,7 +19,7 @@ public class PlayerDetailActivity extends AppCompatActivity {
 
     private String videoId;
     private FrameLayout container;
-    private IYLPlayerEngine playerEngine;
+    private IYLPlayer player;
 
     public static void start(Context context, String videoId) {
         Intent intent = new Intent(context, PlayerDetailActivity.class);
@@ -48,17 +48,17 @@ public class PlayerDetailActivity extends AppCompatActivity {
         /**
          * 通过id查找可用的视频播放器核心
          */
-        playerEngine = YLPlayerFactory.findEngineByID(videoId);
-        if (playerEngine == null) {
+        player = YLPlayerFactory.findEngineByID(videoId);
+        if (player == null) {
             /**
              * 如果没有找到，重新创建
              */
-            playerEngine = YLPlayerFactory.createEngine(container);
+            player = YLPlayerFactory.createEngine(container);
         }
         /**
          * 设置控制器ui
          */
-        playerEngine.withController(new PGCPlayerUI());
+        player.withController(new PGCPlayerUI());
         getWindow().getSharedElementEnterTransition().addListener(new Transition.TransitionListener() {
             @Override
             public void onTransitionStart(Transition transition) {
@@ -93,22 +93,22 @@ public class PlayerDetailActivity extends AppCompatActivity {
                 .title("测试视频")
                 .url(MockData.getPlayerUrl())
                 .build();
-        playerEngine.play(taskInfo, container);
+        player.play(taskInfo, container);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (player != null) {
+            player.pause();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (player != null) {
+            player.resume();
         }
     }
 
@@ -118,8 +118,8 @@ public class PlayerDetailActivity extends AppCompatActivity {
         /**
          * 页面关闭时，需要释放播放器资源
          */
-        if (playerEngine != null) {
-            playerEngine.release();
+        if (player != null) {
+            player.release();
         }
     }
 }

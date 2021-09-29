@@ -18,7 +18,6 @@ import com.yilan.sdk.common.ui.recycle.ViewAttachedToWindowListener;
 import com.yilan.sdk.common.ui.recycle.YLRecycleAdapter;
 import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
-import com.yilan.sdk.player.ylplayer.engine.YLCloudPlayerEngine;
 import com.yilan.sdk.player.ylplayer.engine.YLPlayerFactory;
 import com.yilan.sdk.player.ylplayer.ui.PGCPlayerUI;
 import com.yilan.sdk.sdkdemo.MockData;
@@ -26,7 +25,7 @@ import com.yilan.sdk.sdkdemo.R;
 
 public class FeedFragment extends Fragment {
 
-    IYLPlayer playerEngine;
+    IYLPlayer player;
     RecyclerView recyclerView;
     LinearLayoutManager manager;
     FeedMedia currentMedia;
@@ -80,7 +79,7 @@ public class FeedFragment extends Fragment {
                     public void onViewDetachedFromWindow(BaseViewHolder holder) {
                         if (recyclerView.getScrollState() != RecyclerView.SCROLL_STATE_IDLE
                                 && currentMedia == holder.getData()) {
-                            playerEngine.stop();
+                            player.stop();
                         }
                     }
                 });
@@ -96,7 +95,7 @@ public class FeedFragment extends Fragment {
          * 通过createEngine(ViewGroup)创建的播放器，在列表中频繁切换播放的视频时可减少 视频 因位置频繁切换导致的卡顿问题，提升流畅性
          * 因此我们建议在列表播放的场景中，使用此方法来创建播放器
          */
-        playerEngine = new YLCloudPlayerEngine(YLPlayerFactory.createEngine(playerContainer))
+        player = YLPlayerFactory.createCloudEngine(playerContainer)
                 .videoLoop(false).withController(new PGCPlayerUI());
     }
 
@@ -104,31 +103,31 @@ public class FeedFragment extends Fragment {
         RecyclerView.ViewHolder holder = recyclerView.findViewHolderForAdapterPosition(position);
         if (holder instanceof FeedViewHolder) {
             currentMedia = feedMedia;
-            playerEngine.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
+            player.play(new TaskInfo.Builder().url(feedMedia.url).coverID(R.id.layout_content).videoID(feedMedia.videoId).build(), ((FeedViewHolder) holder).contentContainer);
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (player != null) {
+            player.pause();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (player != null) {
+            player.resume();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (playerEngine != null) {
-            playerEngine.release();
+        if (player != null) {
+            player.release();
         }
     }
 }

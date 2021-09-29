@@ -12,7 +12,7 @@ import com.yilan.sdk.player.ylplayer.engine.IYLPlayer;
 
 
 public class TemplateFragment extends Fragment {
-    IYLPlayer playerEngine;
+    IYLPlayer player;
     public TemplateFragment() {
     }
 
@@ -44,24 +44,24 @@ public class TemplateFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (playerEngine != null) {
-            playerEngine.pause();
+        if (player != null) {
+            player.pause();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (playerEngine != null) {
-            playerEngine.resume();
+        if (player != null) {
+            player.resume();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (playerEngine != null) {
-            playerEngine.release();
+        if (player != null) {
+            player.release();
         }
     }
 }
