@@ -3,9 +3,9 @@ package com.yilan.sdk.sdkdemo;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 public class Utils {
     /**
@@ -41,8 +41,8 @@ public class Utils {
     public static void removeViewFormParent(View v) {
         if (v == null) return;
         ViewParent parent = v.getParent();
-        if (parent instanceof FrameLayout) {
-            ((FrameLayout) parent).removeView(v);
+        if (parent instanceof ViewGroup) {
+            ((ViewGroup) parent).removeView(v);
         }
     }
 }

@@ -60,6 +60,12 @@ public class MainActivity extends AppCompatActivity {
                 FloatPlayerActivity.start(v.getContext());
             }
         });
+        findViewById(R.id.feed_float).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewPageActivity.start(MainActivity.this, NewPageActivity.FEED_FLOAT);
+            }
+        });
     }
 
 }

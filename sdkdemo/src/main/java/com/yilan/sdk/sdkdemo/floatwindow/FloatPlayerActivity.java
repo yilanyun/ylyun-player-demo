@@ -128,7 +128,7 @@ public class FloatPlayerActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         if (floatManager != null) {
-            floatManager.reset();
+            floatManager.release(false);
         }
     }
 

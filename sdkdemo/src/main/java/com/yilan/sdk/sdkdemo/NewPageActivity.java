@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.yilan.sdk.sdkdemo.feed.AutoPlayFeedFragment;
 import com.yilan.sdk.sdkdemo.feed.FeedFragment;
+import com.yilan.sdk.sdkdemo.floatwindow.FeedToFloatFragment;
 import com.yilan.sdk.sdkdemo.simple.SimpleFragment;
 import com.yilan.sdk.sdkdemo.simple.SimpleViewFragment;
 import com.yilan.sdk.sdkdemo.simple.SimpleWithControllerFragment;
@@ -21,6 +22,7 @@ public class NewPageActivity extends FragmentActivity {
     public static int FEED_AUTO_PLAY = 4;
     public static int UGC_FEED = 5;
     public static int SIMPLE_VIEW = 6;
+    public static int FEED_FLOAT = 7;
 
     int type = -1;
 
@@ -63,6 +65,8 @@ public class NewPageActivity extends FragmentActivity {
             fragment = AutoPlayFeedFragment.newInstance();
         } else if (type == SIMPLE_VIEW) {
             fragment = new SimpleViewFragment();
+        } else if (type == FEED_FLOAT) {
+            fragment = FeedToFloatFragment.newInstance();
         }
         return fragment;
     }

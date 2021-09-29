@@ -41,9 +41,9 @@ public class FloatManager {
     public void startFloatWindow(ITaskInfo taskInfo) {
         if (mIsShowing) return;
         Utils.removeViewFormParent(mVideoView);
-        mVideoView.play(taskInfo);
         mFloatView.addView(mVideoView);
         mFloatView.addToWindow();
+        mVideoView.play(taskInfo);
         mIsShowing = true;
     }
 
@@ -64,11 +64,12 @@ public class FloatManager {
         mVideoView.resume();
     }
 
-    public void reset() {
-        if (mIsShowing) return;
+    public void release(boolean force) {
+        if (mIsShowing && !force) return;
         Utils.removeViewFormParent(mVideoView);
         mVideoView.release();
         mVideoView.withController(null);
+        mFloatView.removeFromWindow();
         instance = null;
     }
 
