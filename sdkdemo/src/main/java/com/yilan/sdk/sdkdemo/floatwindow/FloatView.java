@@ -2,26 +2,33 @@ package com.yilan.sdk.sdkdemo.floatwindow;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.yilan.sdk.sdkdemo.R;
 import com.yilan.sdk.sdkdemo.Utils;
 
 @SuppressLint("ViewConstructor")
-public class FloatView extends FrameLayout{
+public class FloatView extends FrameLayout {
 
     private WindowManager mWindowManager;
     private WindowManager.LayoutParams mParams;
 
     private int mDownRawX, mDownRawY;//手指按下时相对于屏幕的坐标
     private int mDownX, mDownY;//手指按下时相对于悬浮窗的坐标
+
+    private OnCloseListener listener;
 
     public FloatView(@NonNull Context context, int x, int y) {
         super(context);
@@ -38,13 +45,32 @@ public class FloatView extends FrameLayout{
         initWindow();
     }
 
+    private void addCloseView() {
+        ImageView image = new ImageView(getContext());
+        image.setImageResource(R.drawable.icon_window_close);
+        image.setPadding(10, 10, 10, 10);
+        image.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onClose();
+                }
+            }
+        });
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.TOP | Gravity.END;
+        params.width = Utils.dp2px(getContext(), 26);
+        params.height = Utils.dp2px(getContext(), 26);
+        this.addView(image,params);
+    }
+
     private void initWindow() {
         mWindowManager = Utils.getWindowManager(getContext().getApplicationContext());
         mParams = new WindowManager.LayoutParams();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             mParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        }else {
-            mParams.type =  WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        } else {
+            mParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
         }
         // 设置图片格式，效果为背景透明
         mParams.format = PixelFormat.TRANSLUCENT;
@@ -59,6 +85,10 @@ public class FloatView extends FrameLayout{
         mParams.y = mDownY;
     }
 
+    public void setListener(OnCloseListener listener) {
+        this.listener = listener;
+    }
+
     /**
      * 添加至窗口
      */
@@ -66,6 +96,7 @@ public class FloatView extends FrameLayout{
         if (mWindowManager != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 if (!isAttachedToWindow()) {
+                    addCloseView();
                     mWindowManager.addView(this, mParams);
                     return true;
                 } else {
@@ -74,6 +105,7 @@ public class FloatView extends FrameLayout{
             } else {
                 try {
                     if (getParent() == null) {
+                        addCloseView();
                         mWindowManager.addView(this, mParams);
                     }
                     return true;
@@ -146,6 +178,10 @@ public class FloatView extends FrameLayout{
                 break;
         }
         return super.onTouchEvent(event);
+    }
+
+    public interface OnCloseListener {
+        void onClose();
     }
 
 }

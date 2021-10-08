@@ -21,6 +21,12 @@ public class FloatManager {
     private FloatManager() {
         mVideoView = new PlayerEngineView(App.getInstance());
         mFloatView = new FloatView(App.getInstance(), 0, 0);
+        mFloatView.setListener(new FloatView.OnCloseListener() {
+            @Override
+            public void onClose() {
+                stopFloatWindow();
+            }
+        });
     }
 
     public static FloatManager getInstance() {
