@@ -21,8 +21,8 @@ public class App extends Application {
         FSLogcat.DEBUG = true;
         YLInit.getInstance()
                 .setApplication(this)
-                .setAccessKey("ylel2vek386q")
-                .setAccessToken("talb5el4cbw3e8ad3jofbknkexi1z8r4")
+                .setAccessKey("")//填写申请的key 和token
+                .setAccessToken("")
                 .build();
         // 是否启用视频缓存功能，默认开启
         YLPlayerConfig.config()
