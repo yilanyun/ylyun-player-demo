@@ -12,13 +12,14 @@ import android.widget.TextView;
 import com.yilan.sdk.common.executor.Dispatcher;
 import com.yilan.sdk.common.executor.handler.YLCoroutineScope;
 import com.yilan.sdk.common.executor.handler.YLJob;
-import com.yilan.sdk.player.utils.TimeUtil;
 import com.yilan.sdk.player.ylplayer.PlayerState;
 import com.yilan.sdk.player.ylplayer.callback.OnPlayerCallBack;
 import com.yilan.sdk.player.ylplayer.callback.OnSimplePlayerCallBack;
 import com.yilan.sdk.player.ylplayer.ui.AbsYLPlayerUI;
 import com.yilan.sdk.reprotlib.body.player.PlayData;
 import com.yilan.sdk.sdkdemo.R;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 自定义播放器UI需要继承自SDK内部提供的{@link AbsYLPlayerUI}，并重写必须的方法来完成UI的填充
@@ -181,7 +182,7 @@ public class CustomPlayerUI extends AbsYLPlayerUI implements SeekBar.OnSeekBarCh
         lastMax = max;
         progressBar.setMax(max);
         seekBar.setMax(max);
-        totalTime.setText(TimeUtil.convertTime(max));
+        totalTime.setText(convertTime(max));
     }
 
     /**
@@ -248,7 +249,7 @@ public class CustomPlayerUI extends AbsYLPlayerUI implements SeekBar.OnSeekBarCh
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        currentTime.setText(TimeUtil.convertTime(progress));
+        currentTime.setText(convertTime(progress));
     }
 
     @Override
@@ -264,5 +265,12 @@ public class CustomPlayerUI extends AbsYLPlayerUI implements SeekBar.OnSeekBarCh
         isSeekTouching = false;
         playerEngine.get().seekTo(seekBar.getProgress());
         startTimeTask();
+    }
+
+    public static String convertTime(int mils){
+        String hms = String.format("%02d:%02d",
+                TimeUnit.MILLISECONDS.toMinutes(mils),
+                TimeUnit.MILLISECONDS.toSeconds(mils) % TimeUnit.MINUTES.toSeconds(1));
+        return hms;
     }
 }
