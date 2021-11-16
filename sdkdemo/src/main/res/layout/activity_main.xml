@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="YLPlayerSDK : 3.3.3.32" />
+        android:text="YLPlayerSDK : 3.4.1.2" />
 
     <TextView
         android:id="@+id/player_simple"

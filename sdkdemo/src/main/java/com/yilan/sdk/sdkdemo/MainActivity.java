@@ -1,5 +1,6 @@
 package com.yilan.sdk.sdkdemo;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
                 NewPageActivity.start(MainActivity.this, NewPageActivity.FEED_FLOAT);
             }
         });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"},99);
+        }
     }
 
 }
