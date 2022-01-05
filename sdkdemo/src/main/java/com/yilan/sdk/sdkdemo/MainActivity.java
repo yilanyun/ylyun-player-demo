@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.yilan.sdk.sdkdemo.customui.PlayerCustomUIActivity;
 import com.yilan.sdk.sdkdemo.floatwindow.FloatPlayerActivity;
@@ -58,17 +59,25 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.player_float).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FloatPlayerActivity.start(v.getContext());
+                if (Utils.checkOverlays(MainActivity.this)) {
+                    FloatPlayerActivity.start(v.getContext());
+                } else {
+                    Toast.makeText(MainActivity.this, "请打开悬浮窗权限", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         findViewById(R.id.feed_float).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewPageActivity.start(MainActivity.this, NewPageActivity.FEED_FLOAT);
+                if (Utils.checkOverlays(MainActivity.this)) {
+                    NewPageActivity.start(MainActivity.this, NewPageActivity.FEED_FLOAT);
+                } else {
+                    Toast.makeText(MainActivity.this, "请打开悬浮窗权限", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"},99);
+            requestPermissions(new String[]{"android.permission.WRITE_EXTERNAL_STORAGE"}, 99);
         }
     }
 

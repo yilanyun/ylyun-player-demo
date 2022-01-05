@@ -1,6 +1,11 @@
 package com.yilan.sdk.sdkdemo;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Trace;
+import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,4 +50,20 @@ public class Utils {
             ((ViewGroup) parent).removeView(v);
         }
     }
+
+    public static boolean checkOverlays(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !Settings.canDrawOverlays(context)) {
+
+            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+
+            intent.setData(Uri.parse("package:" + context.getPackageName()));
+
+            context.startActivity(intent);
+
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
