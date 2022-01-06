@@ -25,6 +25,7 @@ public class FloatManager {
             @Override
             public void onClose() {
                 stopFloatWindow();
+                mVideoView.stop();
             }
         });
     }
