@@ -30,7 +30,7 @@ public class UgcViewHolder extends BaseViewHolder<FeedMedia> {
     }
 
     @Override
-    public void onBindViewHolder(FeedMedia feedMedia, List<FeedMedia> list) {
+    public void onBindViewHolder(FeedMedia feedMedia) {
         title.setText(feedMedia.title);
         cpName.setText(feedMedia.name);
         Glide.with(itemView).load(feedMedia.cover).into(cover);

@@ -37,7 +37,7 @@ public class FeedViewHolder extends BaseViewHolder<FeedMedia> {
 
 
     @Override
-    public void onBindViewHolder(FeedMedia item, final List dataList) {
+    public void onBindViewHolder(FeedMedia item) {
         mediaTitle.setText(item.title);
         Glide.with(itemView).load(item.cover).into(mediaCover);
     }

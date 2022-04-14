@@ -2,8 +2,8 @@ package com.yilan.sdk.sdkdemo.floatwindow;
 
 import android.view.View;
 
-import com.yilan.sdk.data.entity.ITaskInfo;
 import com.yilan.sdk.player.PlayerEngineView;
+import com.yilan.sdk.player.ylplayer.TaskInfo;
 import com.yilan.sdk.sdkdemo.App;
 import com.yilan.sdk.sdkdemo.Utils;
 
@@ -45,7 +45,7 @@ public class FloatManager {
         return mVideoView;
     }
 
-    public void startFloatWindow(ITaskInfo taskInfo) {
+    public void startFloatWindow(TaskInfo taskInfo) {
         if (mIsShowing) return;
         Utils.removeViewFormParent(mVideoView);
         mFloatView.addView(mVideoView);
